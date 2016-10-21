@@ -28,7 +28,7 @@ public class TestRegistrationForm {
     @Before
     public void setUp(){
         //Initialize Chrome browser
-        System.setProperty("webdriver.chrome.driver","D:\\webdriver\\26102016_Selenium_DEMO\\drivers\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
         this.driver=new ChromeDriver();
         driver.manage().window().maximize();
 
