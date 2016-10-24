@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by penko.yordanov on 21-Oct-16.
  */
-public class TestRegistrationForm {
+public class TestRegistrationForm_NoPOM {
     private String baseURL="http://demoqa.com/registration/";
     private WebDriver driver;
 
@@ -41,6 +41,11 @@ public class TestRegistrationForm {
     @After
     public void shutDown() {
         driver.close();
+    }
+
+    @Test
+    public void sucessfullRegistrationUsingPOM(){
+
     }
 
     @Test
