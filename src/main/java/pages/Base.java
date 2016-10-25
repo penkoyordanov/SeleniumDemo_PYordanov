@@ -1,3 +1,5 @@
+package pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,33 +12,33 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 /**
- * Base page
+ * pages.Base page
  */
-public class Base {
+class Base {
 
-    protected WebDriver driver;
+    WebDriver driver;
 
-    protected Base(WebDriver driver) {
+    Base(WebDriver driver) {
         this.driver = driver;
     }
 
-    protected final void visit(String url) {
+    final void visit(String url) {
         driver.get(url);
     }
 
-    protected final WebElement find(By locator) {
+     WebElement find(By locator) {
         return driver.findElement(locator);
     }
 
-    protected final List<WebElement> findElements(By locator) {
+    final List<WebElement> findElements(By locator) {
         return driver.findElements(locator);
     }
 
-    protected final void click(By locator) {
+    final void click(By locator) {
         find(locator).click();
     }
 
-    protected final void selectFromDrpdownByVisibleText(By locator,String selectText) {
+    final void selectFromDrpdownByVisibleText(By locator, String selectText) {
         Select select = new Select(find(locator));
         select.selectByVisibleText(selectText);
     }
@@ -45,7 +47,7 @@ public class Base {
         find(locator).clear();
     }
 
-    protected final void type(String inputText, By locator) {
+    final void type(String inputText, By locator) {
         for (char ch : inputText.toCharArray()) {
             find(locator).sendKeys(Character.toString(ch));
         }
@@ -55,7 +57,7 @@ public class Base {
         find(locator).sendKeys(inputText);
     }
 
-    protected final String getTextOfElement(By locator) {
+    final String getTextOfElement(By locator) {
         return find(locator).getText();
     }
 

@@ -1,3 +1,5 @@
+package pages;
+
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -5,7 +7,7 @@ import org.openqa.selenium.WebDriver;
  */
 public class BasePage extends Base {
     String url = "http://demoqa.com";
-    BasePage(WebDriver driver){
+    public BasePage(WebDriver driver){
         super(driver);
         visit(url);
     }
@@ -13,5 +15,10 @@ public class BasePage extends Base {
     public SignUpPage navigateToSignUp(){
         visit(url+"/registration/");
         return new SignUpPage(driver);
+    }
+
+    public SelectablePage navigateSelectablePage(){
+        visit(url+"/selectable/");
+        return new SelectablePage(driver);
     }
 }

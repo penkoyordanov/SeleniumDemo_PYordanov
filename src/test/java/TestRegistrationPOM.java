@@ -3,6 +3,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
+import pages.BasePage;
+import pages.Browser;
+import pages.SignUpPage;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -51,6 +54,7 @@ public class TestRegistrationPOM {
         signUpPage.setPassword("188k#F41|4o*6IZ");
         signUpPage.setConfirmPassword("188k#F41|4o*6IZ");
         signUpPage.clickSubmitBtn();
+
 
         Assert.assertThat(signUpPage.getConfimationText(),is(equalTo("Thank you for your registration")));
 

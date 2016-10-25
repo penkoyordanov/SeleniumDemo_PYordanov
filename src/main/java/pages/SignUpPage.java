@@ -1,9 +1,9 @@
+package pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-/**
- * Created by admin on 10/24/2016.
- */
+
 public class SignUpPage extends Base {
     private By firstNameField = By.id("name_3_firstname");
     private By lastNameField = By.id("name_3_lastname");
