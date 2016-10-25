@@ -1,78 +1,91 @@
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 
 /**
  * Created by admin on 10/24/2016.
  */
-public class SignUpPage extends Base{
-    private By firstNameField=By.id("name_3_firstname");
-    private By lastNameField=By.id("name_3_lastname");
+public class SignUpPage extends Base {
+    private By firstNameField = By.id("name_3_firstname");
+    private By lastNameField = By.id("name_3_lastname");
+    private By phoneField = By.id("phone_9");
+    private By usernameField = By.id("username");
+    private By emailField = By.id("email_1");
+    private By passwordField = By.xpath("//label[text()='Password']/../input");
+    private By confirmPasswordField = By.xpath("//label[text()='Confirm Password']/../input");
+    private By submitBtn = By.cssSelector("[type='submit']");
 
 
-    public void setFirstName(String firstName){
-        type(firstName,firstNameField);
-    }
-    public void setLastName(String lastName){
-        type(lastName,lastNameField);
-    }
-
-   public void selectRadioBtn(String value){
-       click(By.xpath("//input[@value='"+value+"' and @type='radio']"));
-   }
-
-   public void selectCheckBox(String value){
-       click(By.cssSelector("[value='"+value+"']"));
-   }
-
-    public void selectCountry(String country){
-        selectFromDrpdownByVisibleText(By.id("dropdown_7"),country);
-    }
-
-    public void selectBdayMonth(String month){
-        selectFromDrpdownByVisibleText(By.id("mm_date_8"),month);
-    }
-
-
-    /*//Select from dropdown by text
-    select =new Select(driver.findElement(By.id("dd_date_8")));
-        select.selectByVisibleText("28");
-
-    //Assert that selected option matches expected selection
-    assertEquals("28", select.getFirstSelectedOption().getText());
-
-    //Select from dropdown by text
-    select =new Select(driver.findElement(By.id("yy_date_8")));
-        select.selectByVisibleText("1985");
-
-    //Assert that selected option matches expected selection
-    assertEquals("1985", select.getFirstSelectedOption().getText());
-
-    WebElement phoneNumberField=driver.findElement(By.id("phone_9"));
-        phoneNumberField.sendKeys("359895654123");
-
-    WebElement userNameField=driver.findElement(By.id("username"));
-        userNameField.sendKeys("penkoyordanov"+milis);
-
-    WebElement emailField=driver.findElement(By.id("email_1"));
-        emailField.sendKeys("penko"+milis+"@icb.bg");
-
-    WebElement passwordField=driver.findElement(By.xpath("//label[text()='Password']/../input"));
-        passwordField.sendKeys("188k#F41|4o*6IZ");
-
-    WebElement confirmPassword=driver.findElement(By.xpath("//label[text()='Confirm Password']/../input"));
-        confirmPassword.sendKeys("188k#F41|4o*6IZ");
-
-        Assert.assertEquals("Strong",driver.findElement(By.id("piereg_passwordStrength")).getText());
-
-    WebElement submitBtn=driver.findElement(By.cssSelector("[type='submit']"));
-        submitBtn.click();
-*/
-
-    SignUpPage(WebDriver driver){
+    SignUpPage(WebDriver driver) {
         super(driver);
-
     }
+
+
+    public void setFirstName(String firstName) {
+        type(firstName, firstNameField);
+    }
+
+    public void setLastName(String lastName) {
+        type(lastName, lastNameField);
+    }
+
+    public void selectMarialStatus(String marialStatus) {
+        click(By.xpath("//input[@value='" + marialStatus + "' and @type='radio']"));
+    }
+
+    public void selectHobby(String hobby) {
+        click(By.cssSelector("[value='" + hobby + "']"));
+    }
+
+    public void selectCountry(String country) {
+        selectFromDrpdownByVisibleText(By.id("dropdown_7"), country);
+    }
+
+
+    public void selectBday(String birthday) {
+        String[] bdaySeparate=birthday.split("/");
+        selectDay(bdaySeparate[0]);
+        selectMonth(bdaySeparate[1]);
+        selectYear(bdaySeparate[2]);
+    }
+
+    private void selectDay(String day) {
+        selectFromDrpdownByVisibleText(By.id("dd_date_8"), day);
+    }
+
+    private void selectMonth(String month) {
+        selectFromDrpdownByVisibleText(By.id("mm_date_8"), month);
+    }
+
+    private void selectYear(String year) {
+        selectFromDrpdownByVisibleText(By.id("yy_date_8"), year);
+    }
+
+    public void setPhoneNumber(String phone) {
+        type(phone, phoneField);
+    }
+
+    public void setUsername(String username) {
+        type(username, usernameField);
+    }
+
+    public void setEmail(String email) {
+        type(email, emailField);
+    }
+
+    public void setPassword(String password) {
+        type(password, passwordField);
+    }
+
+    public void setConfirmPassword(String password) {
+        type(password, confirmPasswordField);
+    }
+
+    public void clickSubmitBtn() {
+        click(submitBtn);
+    }
+
+    public String getConfimationText(){
+        return getTextOfElement(By.xpath("//p[@class='piereg_message']"));
+    }
+
 }

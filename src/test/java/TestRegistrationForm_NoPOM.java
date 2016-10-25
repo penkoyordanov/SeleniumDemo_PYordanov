@@ -7,21 +7,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by penko.yordanov on 21-Oct-16.
+ * Following test case shows basics of selenium
  */
 public class TestRegistrationForm_NoPOM {
-    private String baseURL="http://demoqa.com/registration/";
     private WebDriver driver;
 
-    String firstName="Penko";
-    WebDriverWait wait;
     private long milis;
 
 
@@ -33,6 +29,7 @@ public class TestRegistrationForm_NoPOM {
         driver.manage().window().maximize();
 
         //Navigate to page
+        String baseURL = "http://demoqa.com/registration/";
         driver.get(baseURL);
         //Get current time in miliseconds. This number will be added to the email and username, as registration requires unique users
         milis=System.currentTimeMillis() % 1000;
@@ -58,42 +55,28 @@ public class TestRegistrationForm_NoPOM {
         lastNameField.sendKeys("Yordanov");
 
         //Locate and click on radio button
-        WebElement radioBtn=driver.findElement(By.xpath("//input[@value='single' and @type='radio']"));
-        radioBtn.click();
-        Assert.assertTrue(radioBtn.isSelected());
+        WebElement marialStatusRadio=driver.findElement(By.xpath("//input[@value='single' and @type='radio']"));
+        marialStatusRadio.click();
 
         //Locate and click on radio button
-        WebElement checkBox=driver.findElement(By.cssSelector("[value='dance']"));
-        checkBox.click();
-        Assert.assertTrue(checkBox.isSelected());
+        WebElement hobbyCheckBox=driver.findElement(By.cssSelector("[value='dance']"));
+        hobbyCheckBox.click();
 
         //Select from dropdown by text
         Select select = new Select(driver.findElement(By.id("dropdown_7")));
         select.selectByVisibleText("Bulgaria");
 
-        //Assert that selected option matches expected selection
-        assertEquals("Bulgaria", select.getFirstSelectedOption().getText());
-
         //Select from dropdown by text
         select =new Select(driver.findElement(By.id("mm_date_8")));
         select.selectByVisibleText("9");
-
-        //Assert that selected option matches expected selection
-        assertEquals("9", select.getFirstSelectedOption().getText());
 
         //Select from dropdown by text
         select =new Select(driver.findElement(By.id("dd_date_8")));
         select.selectByVisibleText("28");
 
-        //Assert that selected option matches expected selection
-        assertEquals("28", select.getFirstSelectedOption().getText());
-
         //Select from dropdown by text
         select =new Select(driver.findElement(By.id("yy_date_8")));
         select.selectByVisibleText("1985");
-
-        //Assert that selected option matches expected selection
-        assertEquals("1985", select.getFirstSelectedOption().getText());
 
         WebElement phoneNumberField=driver.findElement(By.id("phone_9"));
         phoneNumberField.sendKeys("359895654123");
@@ -110,10 +93,15 @@ public class TestRegistrationForm_NoPOM {
         WebElement confirmPassword=driver.findElement(By.xpath("//label[text()='Confirm Password']/../input"));
         confirmPassword.sendKeys("188k#F41|4o*6IZ");
 
-        Assert.assertEquals("Strong",driver.findElement(By.id("piereg_passwordStrength")).getText());
-
         WebElement submitBtn=driver.findElement(By.cssSelector("[type='submit']"));
         submitBtn.click();
+
+        Assert.assertTrue(marialStatusRadio.isSelected());
+        Assert.assertTrue(hobbyCheckBox.isSelected());
+        //Assert that selected option matches expected selection
+        assertEquals("Bulgaria", select.getFirstSelectedOption().getText());
+        Assert.assertEquals("Strong",driver.findElement(By.id("piereg_passwordStrength")).getText());
+
 
         Assert.assertThat(driver.findElement(By.xpath("//p[@class='piereg_message']")).getText(),is(equalTo("Thank you for your registration")));
 
